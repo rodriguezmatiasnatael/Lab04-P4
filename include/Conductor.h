@@ -1,0 +1,28 @@
+#ifndef CONDUCTOR_H
+#define CONDUCTOR_H
+
+#include <set>
+#include "Usuario.h"
+#include "TipoLibreta.h"
+#include "TipoVehiculo.h"
+#include "Vehiculo.h"
+#include "DTVehiculosConductor.h"
+#include "DTFecha.h"
+
+class Conductor : public Usuario {
+private:
+    std::set<TipoLibreta> libretas;
+    std::set<Vehiculo*> vehiculos;
+public:
+    Conductor(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::set<TipoLibreta> libs);
+    ~Conductor();
+
+    bool estaHabilitado(TipoVehiculo);
+    void asociarVehiculo(Vehiculo*);
+    int getCantCalificaciones();
+    float getCalificacionPromedio();
+    std::set<DTVehiculosConductor> listarVehiculos();
+    bool hayViajesFechaConductor(DTFecha);
+};
+
+#endif
