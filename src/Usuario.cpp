@@ -2,19 +2,26 @@
 
 
 Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasena, std::string email){
-    return;
+    this->nickname = nickname;
+    this->nombre = nombre;
+    this->contrasena = contrasena;
+    this->email = email;
+    this->calificaciones.clear();
 }
 
-TipoUsuario Usuario::getTipo(){
+/*TipoUsuario Usuario::getTipo(){
     return;
-}
+} AL FINAL ESTO NO VA POR EL DINAMIC CAST*/
 
 DTUsuario Usuario::getDTUsuario(){
-    return;
+    DTUsuario res = DTUsuario(this->nickname, this->nombre);
+    return res;
 }
 
-void Usuario::asociarCalificacion(Calificacion &cal){
-    return;
+void Usuario::asociarCalificacion(Calificacion *cal){
+    this->calificaciones.insert(cal);
 }
 
-Usuario::~Usuario() {}
+Usuario::~Usuario() {
+    
+}
