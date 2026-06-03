@@ -17,8 +17,8 @@ public:
     Conductor(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::set<TipoLibreta> libs);
     ~Conductor();
 
-    bool estaHabilitado(TipoVehiculo);
-    void asociarVehiculo(Vehiculo*);
+    bool estaHabilitado(TipoVehiculo tipo);
+    void asociarVehiculo(Vehiculo* v);
     int getCantCalificaciones();
     float getCalificacionPromedio();
     std::set<DTVehiculosConductor> listarVehiculos();

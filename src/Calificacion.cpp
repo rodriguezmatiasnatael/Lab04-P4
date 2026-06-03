@@ -7,6 +7,10 @@ Calificacion::Calificacion(DTFecha fecha, int puntaje) {
 
 Calificacion::~Calificacion() {}
 
+int Calificacion::getPuntaje(){
+    return this->puntaje;
+}
+
 bool Calificacion::calificacionEncontrada(std::string Calificador, std::string Calificado){
     bool coincideCalificador = this->realiza->getNickname() == Calificador;
     bool coincideCalificado = this->califica->getNickname() == Calificado;
