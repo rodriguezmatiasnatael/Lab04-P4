@@ -26,6 +26,7 @@ public:
     Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio);
     ~Viaje();
 
+    DTFecha getFecha();
     int lugaresDisponibles(int);
     bool cumpleRequisitos(DTFecha, std::string, std::string, int);
     DTConsultaViaje getDTConsultaViaje(DTFecha, std::string, std::string, int);
