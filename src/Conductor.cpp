@@ -1,5 +1,6 @@
 #include "../include/Conductor.h"
 #include "../include/Vehiculo.h"
+#include "../include/Calificacion.h"
 
 Conductor::Conductor(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::set<TipoLibreta> libs)
     : Usuario(nickname, nombre, contrasena, email) {
@@ -45,16 +46,31 @@ float Conductor::getCalificacionPromedio(){
     }
     float suma = 0;
     for (auto cal : this->calificaciones){
-        suma = suma + cal->getPuntaje();
+        suma = suma + cal->getPuntaje(); //Aca da error porque queremos usar metodo de Calificacion con un forward declaration
     }
     total = suma / this->calificaciones.size();
     return total;
 }
 
 std::set<DTVehiculosConductor> Conductor::listarVehiculos(){
-
+    std::set<DTVehiculosConductor> res; 
+    if (this->vehiculos.size() == 0 ){
+        return res;
+    }
+    
+    for (auto veh : this->vehiculos){
+        std::string mat;
+        std::string mod;
+        int cap;
+        mat = veh->getMatricula(); 
+        mod = veh->getModelo();
+        cap = veh->getCapacidad();
+        DTVehiculosConductor DTVeh = DTVehiculosConductor(mat, mod, cap);
+        res.insert(DTVeh);
+    }
+    return res;
 }
 
 bool Conductor::hayViajesFechaConductor(DTFecha){
-    
+
 }

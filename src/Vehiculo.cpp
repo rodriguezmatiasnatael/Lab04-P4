@@ -22,6 +22,19 @@ Vehiculo::~Vehiculo() {
     this->viajes.clear();
 }
 
+std::string Vehiculo::getMatricula(){
+    return this->matricula;
+}
+std::string Vehiculo::getMarca(){
+    return this->marca;
+}
+std::string Vehiculo::getModelo(){
+    return this->modelo;
+}
+int Vehiculo::getCapacidad(){
+    return this->capacidad;
+}
+
 void Vehiculo::setConductor(Conductor& c){
     this->conductor = &c;
 }
