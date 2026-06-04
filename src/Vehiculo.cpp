@@ -9,6 +9,7 @@ Vehiculo::Vehiculo(std::string matricula, int capacidad, std::string marca, std:
     this->modelo = modelo;
     this->tipo = tipo;
 }
+
 Vehiculo::~Vehiculo() {
     if(this->conductor != nullptr){ //borramos conductor
         delete this->conductor;

@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 #include "DTFecha.h"
-#include "Usuario.h"
+
+class Usuario;
 
 class Calificacion {
 private:

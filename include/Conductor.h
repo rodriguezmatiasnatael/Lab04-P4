@@ -5,9 +5,10 @@
 #include "Usuario.h"
 #include "TipoLibreta.h"
 #include "TipoVehiculo.h"
-#include "Vehiculo.h"
 #include "DTVehiculosConductor.h"
 #include "DTFecha.h"
+
+class Vehiculo;
 
 class Conductor : public Usuario {
 private:
