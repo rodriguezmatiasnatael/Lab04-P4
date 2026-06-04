@@ -1,6 +1,7 @@
 #include "../include/Conductor.h"
 #include "../include/Vehiculo.h"
 #include "../include/Calificacion.h"
+#include "../include/Viaje.h"
 
 Conductor::Conductor(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::set<TipoLibreta> libs)
     : Usuario(nickname, nombre, contrasena, email) {
@@ -72,5 +73,12 @@ std::set<DTVehiculosConductor> Conductor::listarVehiculos(){
 }
 
 bool Conductor::hayViajesFechaConductor(DTFecha){
+    if (this->vehiculos.size() == 0){
+        return false;
+    }
+    for (auto veh : this->vehiculos){
+        for (auto viaje : veh->viajes){
 
+        }
+    }
 }
