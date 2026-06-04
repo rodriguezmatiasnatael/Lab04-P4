@@ -13,8 +13,8 @@
 
 class ControladorUsuario {
 private:
-    ManejadorUsuarios* mu;
-    ManejadorVehiculos* mve;
+    static ManejadorUsuarios* mu;
+    static ManejadorVehiculos* mve;
 public:
     bool altaPasajero(std::string, std::string, std::string, std::string, std::string);
     bool altaConductor(std::string, std::string, std::string, std::string, std::set<TipoLibreta>);
