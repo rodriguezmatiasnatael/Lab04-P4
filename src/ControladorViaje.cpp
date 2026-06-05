@@ -7,10 +7,15 @@ ControladorViaje::ControladorViaje(){
 }
 
 std::set<std::string> ControladorViaje::listarPasajeros(){
-    this->mu = ManejadorUsuarios::getInstance();
-    std::set<Usuario> usuarios = mu->getUsuarios();
-    
-
+    std::set<Usuario*> usuarios = mu->getUsuarios();
+    std::set<std::string> res;
+    for (auto us : usuarios){
+        Pasajero* pas = dynamic_cast<Pasajero*>(us);
+        if (pas != nullptr){
+            res.insert(pas->getNickname());
+        }
+    }
+    return res;
 }
 
 /*std::set<DTConsultaViaje> consultarViajes(DTFecha,std::string,std::string,int);
