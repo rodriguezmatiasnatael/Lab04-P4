@@ -13,7 +13,7 @@ private:
     ManejadorUsuarios();
     std::set<Usuario*> usuarios;
 public:
-    ManejadorUsuarios* getInstance();
+    static ManejadorUsuarios* getInstance();
     bool existeUsuario(std::string);
     void crearPasajero(std::string, std::string, std::string, std::string, std::string);
     void crearConductor(std::string, std::string, std::string, std::string, std::set<TipoLibreta>);

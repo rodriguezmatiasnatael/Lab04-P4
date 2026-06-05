@@ -13,7 +13,7 @@ private:
     ManejadorVehiculos();
     std::set<Vehiculo*> vehiculos;
 public:
-    ManejadorVehiculos* getInstance();
+    static ManejadorVehiculos* getInstance();
     bool existeVehiculo(std::string);
     Vehiculo* crearVehiculo(std::string,int,std::string,std::string,TipoVehiculo);
 };
