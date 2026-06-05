@@ -24,8 +24,8 @@ private:
     ManejadorVehiculos* mve;
     ManejadorUsuarios* mu;
     ManejadorViajes* mvi;
-    std::string nickname;
-    int codigo;
+    //std::string nickname;  ERROR, no?
+    //int codigo;
 public:
     std::set<std::string> listarPasajeros();
     std::set<DTConsultaViaje> consultarViajes(DTFecha,std::string,std::string,int);
