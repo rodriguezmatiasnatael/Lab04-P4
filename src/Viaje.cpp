@@ -8,51 +8,122 @@ Viaje::Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino,
     this->destino = destino;
     this->asientosPublicados = asientosPublicados;
     this->precio = precio;
+    this->vehiculo = nullptr;
 }
 
-Viaje::~Viaje() {}
-
-
-int Viaje::lugaresDisponibles(int cant) const {
-    return 0;
+Viaje::~Viaje() {
+    for (auto r : this->resevas) { 
+        if (r != nullptr) {
+            delete r;
+        }
+    }    
+    this->resevas.clear();
 }
 
-bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int cantAsientos) const {
+DTFecha Viaje::getFecha() {
+    return this->fecha;
+}
+
+int Viaje::lugaresDisponibles(int cant) {
+    int ocupados = 0;
+    for (auto r : this->resevas) {
+        if (r != nullptr) {
+            // agregar el metodo getAsientosReservados() a Reserva.h
+            ocupados += r->getAsientosReservados(); 
+        }
+    }
+    return this->asientosPublicados - ocupados;
+}
+
+bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int cant) {
+    // Asumiendo que DTFecha tiene el operador == sobrecargado
+    bool coincideRuta = (this->fecha == f) && (this->origen == orig) && (this->destino == dest);
+    bool hayLugar = (this->lugaresDisponibles(cant) >= cant);
+    
+    if (coincideRuta && hayLugar) {
+        return true;
+    }
     return false;
 }
 
-DTConsultaViaje Viaje::getDTConsultaViaje(DTFecha f, std::string orig, std::string dest, int cantAsientos) const {
-    return DTConsultaViaje();
+DTConsultaViaje Viaje::getDTConsultaViaje(DTFecha f, std::string orig, std::string dest, int cant) {
+    DTConsultaViaje dt = DTConsultaViaje(this->codigo, this->fecha, this->origen, this->destino, this->precio, this->asientosPublicados);
+    return dt;
 }
 
-bool Viaje::existeReservaUsuario(std::string nickname) const {
+bool Viaje::existeReservaUsuario(std::string nickname) {
+    for (auto r : this->resevas) {
+        if (r != nullptr) {            
+            if (r->laRealizo(nickname)) { 
+                return true;
+            }
+        }
+    }
     return false;
 }
 
-Reserva Viaje::agregarReserva(int cantAsientos, DTFecha f) {
-    return Reserva();
+Reserva* Viaje::agregarReserva(int cantAsientos, DTFecha f) {    
+    Reserva* r = new Reserva(cantAsientos, f);
+    this->resevas.insert(r);    
+    return r; 
 }
 
-bool Viaje::esConductor(std::string nickname) const {
+bool Viaje::esConductor(std::string nickname) {
+    if (this->vehiculo != nullptr) {        
+        return (this->vehiculo->nicknamePropietario() == nickname);
+    }
     return false;
 }
 
-bool Viaje::esPasajero(std::string nickname) const {
+bool Viaje::esPasajero(std::string nickname) {
+    return this->existeReservaUsuario(nickname);
+}
+
+DTListarViaje Viaje::getDTListarViaje() {
+    DTListarViaje dt = DTListarViaje(this->codigo, this->origen, this->destino, this->precio);
+    return dt;
+}
+
+std::set<DTUsuarioViaje> Viaje::getSetDTUsuarioViaje(std::string nickname, TipoUsuario tipo) {
+    std::set<DTUsuarioViaje> dtSet;    
+    if (this->vehiculo != nullptr) {        
+        dtSet.insert(this->vehiculo->getDTUsuarioViaje());
+    }    
+    for (auto r : this->resevas) {
+        if (r != nullptr) {
+            dtSet.insert(r->getDTUsuarioViaje());
+        }
+    }
+    return dtSet;
+}
+
+bool Viaje::existeCalificacion(std::string nick1, std::string nick2) {
+    for (auto r : this->resevas) {
+        if (r != nullptr) {            
+            if (r->hayCalificacion(nick1, nick2)) {
+                return true;
+            }
+        }
+    }
     return false;
 }
 
-DTListarViaje Viaje::getDTListarViaje() const {
-    return DTListarViaje();
-}
+Reserva* Viaje::obtenerReserva(std::string nick1, std::string nick2, TipoUsuario tipo) {
+    std::string nickPasajero;
+    
+    if (tipo == TipoUsuario::T_Conductor) {
+        nickPasajero = nick2;
+    } else {
+        nickPasajero = nick1;
+    }
 
-std::set<DTUsuarioViaje> Viaje::getSetDTUsuarioViaje(std::string nickname, TipoUsuario tipo) const {
-    std::set<DTUsuarioViaje> conjuntoResultado;
-    return conjuntoResultado;
+    for (auto r : this->resevas) {
+        if (r != nullptr) {            
+            if (r->laRealizo(nickPasajero)) {
+                return r; 
+            }
+        }
+    }
+    
+    return nullptr; // 
 }
-
-bool Viaje::existeCalificacion(std::string nickCalificador, std::string nickCalificado) const {
-    return false;
-}
-
-Reserva Viaje::obtenerReserva(std::string nickCalificador, std::string nickCalificado, TipoUsuario tipo) const {
-    return Reserva();
