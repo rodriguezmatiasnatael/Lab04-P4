@@ -27,16 +27,14 @@ DTFecha Viaje::getFecha() {
 int Viaje::lugaresDisponibles(int cant) {
     int ocupados = 0;
     for (auto r : this->resevas) {
-        if (r != nullptr) {
-            // agregar el metodo getAsientosReservados() a Reserva.h
+        if (r != nullptr) {            
             ocupados += r->getAsientosReservados(); 
         }
     }
     return this->asientosPublicados - ocupados;
 }
 
-bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int cant) {
-    // Asumiendo que DTFecha tiene el operador == sobrecargado
+bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int cant) {    
     bool coincideRuta = (this->fecha == f) && (this->origen == orig) && (this->destino == dest);
     bool hayLugar = (this->lugaresDisponibles(cant) >= cant);
     
