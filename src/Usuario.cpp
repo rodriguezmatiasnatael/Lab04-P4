@@ -1,7 +1,8 @@
 #include "../include/Usuario.h"
 #include "../include/Calificacion.h"
 
-Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasena, std::string email){
+// === Constructor ===
+Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasena, std::string email) {
     this->nickname = nickname;
     this->nombre = nombre;
     this->contrasena = contrasena;
@@ -9,19 +10,44 @@ Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasen
     this->calificaciones.clear();
 }
 
-/*TipoUsuario Usuario::getTipo(){
-    return;
-} AL FINAL ESTO NO VA POR EL DINAMIC CAST*/
+Usuario::~Usuario() {
+    for (auto c : this->calificaciones) {
+        if (c != nullptr) {
+            delete c;
+        }
+    }
+    this->calificaciones.clear();
+}
 
-DTUsuario Usuario::getDTUsuario(){
+std::string Usuario::getNickname() const {
+    return this->nickname;
+}
+
+std::string Usuario::getNombre() const {
+    return this->nombre;
+}
+
+DTUsuario Usuario::getDTUsuario() {
     DTUsuario res = DTUsuario(this->nickname, this->nombre);
     return res;
 }
 
-void Usuario::asociarCalificacion(Calificacion *cal){
+void Usuario::asociarCalificacion(Calificacion *cal) {
     this->calificaciones.insert(cal);
 }
 
-Usuario::~Usuario() {
+float Usuario::getCalificacionPromedio() {
+    if (this->calificaciones.empty()) {
+        return 0.0f; 
+    }
+
+    float suma = 0;
     
+    for (auto c : this->calificaciones) {
+        if (c != nullptr) {            
+            suma += c->getPuntaje(); 
+        }
+    }
+
+    return suma / this->calificaciones.size();
 }
