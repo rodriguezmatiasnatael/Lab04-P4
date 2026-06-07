@@ -21,6 +21,7 @@ public:
     virtual ~Usuario();
     std::string getNickname() const;
     std::string getNombre() const;
+    float getCalificacionPromedio();
     // TipoUsuario getTipo(); ESTE NO VA PORQUE SE HACE DINAMIC CAST
     DTUsuario getDTUsuario();
     void asociarCalificacion(Calificacion*);
