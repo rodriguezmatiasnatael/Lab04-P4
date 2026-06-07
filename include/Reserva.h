@@ -18,6 +18,7 @@ private:
 public:
     Reserva(int asientosReservados, DTFecha fecha);
     ~Reserva();
+    int getAsientosReservados();
     void setPasajero(Pasajero* p);
     bool laRealizo(std::string);
     DTUsuarioViaje getDTUsuarioViaje();
