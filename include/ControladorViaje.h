@@ -17,6 +17,8 @@
 #include "DTVehiculosConductor.h"
 #include "DTFecha.h"
 #include "DTUsuario.h"
+#include "Viaje.h"
+#include "IControladorFechaActual.h"
 
 
 class ControladorViaje{

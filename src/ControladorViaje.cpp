@@ -18,10 +18,58 @@ std::set<std::string> ControladorViaje::listarPasajeros(){
     return res;
 }
 
-/*std::set<DTConsultaViaje> consultarViajes(DTFecha,std::string,std::string,int);
-bool generarReserva(std::string,int,int);
-std::set<DTUsuario> listarUsuarios();
-std::set<DTListarViaje> listarViajes(std::string);
+std::set<DTConsultaViaje> ControladorViaje::consultarViajes(DTFecha fecha,std::string origen,std::string destino,int asientos){
+    std::set<Viaje*> viajes = mvi->getViajes();
+    std::set<DTConsultaViaje> res;
+    for (auto v : viajes){
+        int lugDisp = v->lugaresDisponibles(asientos);
+        bool cumple = v->cumpleRequisitos(fecha, origen, destino, lugDisp);
+        if (cumple) {
+            DTConsultaViaje nodo = v->getDTConsultaViaje(fecha, origen, destino, asientos);
+            res.insert(nodo);
+        }
+    }
+    return res;
+}
+
+//SOBRECARGAR EL OPERADOR < para que inserte los DTConsultaViaje ordenados.
+// El listado se presenta ordenado de menor a
+// mayor precio total, y en caso de empate se debe mostrar primero el de mayor
+// calificación promedio.
+
+
+bool ControladorViaje:: generarReserva(std::string nickname,int codigo,int asientos){
+    DTFecha fechaActual = ControladorFechaActual::getInstance()->getFecha();
+    Viaje *viaje = mvi->getViaje(codigo);
+    bool hayReserva = viaje->existeReservaUsuario(nickname);
+    int lugDisp = viaje->lugaresDisponibles(asientos);
+    if (!hayReserva && lugDisp >= 0){
+        Reserva* reserva = viaje->agregarReserva(asientos, fechaActual);
+        Pasajero* p = dynamic_cast<Pasajero*>(mu->getUsuario(nickname));
+        reserva->setPasajero(p);
+    }
+}
+
+std::set<DTUsuario> ControladorViaje::listarUsuarios(){
+    std::set<DTUsuario> res;
+    std::set<Usuario*> usuarios = mu->getUsuarios();
+    for (auto u : usuarios){
+        DTUsuario nodo = DTUsuario(u->getNickname(), u->getNombre());
+        res.insert(nodo);
+    }
+    return res;
+}
+
+/*
+std::set<DTListarViaje> ControladorViaje:: listarViajes(std::string nickname){
+    std::set<Viaje*> viajes = mvi->getViajes();
+    Pasajero* pas = dynamic_cast<Pasajero*>()
+    for (auto v : viajes) {
+
+    }
+}
+
+
 std::set<DTUsuarioViaje> listarUsuariosViaje(int);
 bool calificarUsuario(std::string,int);
 std::set<DTVehiculosConductor> listarVehiculos(std::string);

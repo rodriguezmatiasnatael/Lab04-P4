@@ -24,4 +24,9 @@ public:
   float getPrecioTotal();
 };
 
+//SOBRECARGAR EL OPERADOR < para que inserte los DTConsultaViaje ordenados.
+// El listado se presenta ordenado de menor a
+// mayor precio total, y en caso de empate se debe mostrar primero el de mayor
+// calificación promedio.
+
 #endif
