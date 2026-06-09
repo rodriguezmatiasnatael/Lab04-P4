@@ -44,8 +44,13 @@ bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int 
     return false;
 }
 
-DTConsultaViaje Viaje::getDTConsultaViaje(DTFecha f, std::string orig, std::string dest, int asientos){
-    DTConsultaViaje dt = DTConsultaViaje(this->codigo, this->fecha, this->origen, this->destino, this->precio, this->asientosPublicados);
+DTConsultaViaje Viaje::getDTConsultaViaje(DTFecha f, std::string orig, std::string dest, int cant) {    
+    float precioTotal = this->precio * cant;    
+    std::string marca = this->vehiculo->getMarca();
+    std::string modelo = this->vehiculo->getModelo();
+    std::string conductor = this->vehiculo->nombreConductor(); 
+    float calProm = this->vehiculo->calPromConductor();    
+    DTConsultaViaje dt = DTConsultaViaje(this->codigo, marca, modelo, conductor, calProm, precioTotal);
     return dt;
 }
 
@@ -62,7 +67,7 @@ bool Viaje::existeReservaUsuario(std::string nickname) {
 
 Reserva* Viaje::agregarReserva(int cantAsientos, DTFecha f) {    
     Reserva* r = new Reserva(cantAsientos, f);
-    this->resevas.insert(r);    
+    this->reservas.insert(r);    
     return r; 
 }
 
@@ -77,10 +82,11 @@ bool Viaje::esPasajero(std::string nickname) {
     return this->existeReservaUsuario(nickname);
 }
 
-DTListarViaje Viaje::getDTListarViaje() {
-    DTListarViaje dt = DTListarViaje(this->codigo, this->origen, this->destino, this->precio);
+DTListarViaje Viaje::getDTListarViaje() {  
+    std::string nombreCond = this->vehiculo->nombreConductor();  
+    DTListarViaje dt = DTListarViaje(this->codigo, this->fecha, this->origen, this->destino, nombreCond);
     return dt;
-}
+}	
 
 std::set<DTUsuarioViaje> Viaje::getSetDTUsuarioViaje(std::string nickname, TipoUsuario tipo) {
     std::set<DTUsuarioViaje> dtSet;    
@@ -125,4 +131,3 @@ Reserva* Viaje::obtenerReserva(std::string nick1, std::string nick2, TipoUsuario
     
     return nullptr;
 }
-
