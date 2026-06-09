@@ -72,10 +72,7 @@ Reserva* Viaje::agregarReserva(int cantAsientos, DTFecha f) {
 }
 
 bool Viaje::esConductor(std::string nickname) {
-    if (this->vehiculo != nullptr) {        
-        return (this->vehiculo->nicknamePropietario() == nickname);
-    }
-    return false;
+    return (this->vehiculo->nicknamePropietario() == nickname);
 }
 
 bool Viaje::esPasajero(std::string nickname) {
@@ -90,9 +87,7 @@ DTListarViaje Viaje::getDTListarViaje() {
 
 std::set<DTUsuarioViaje> Viaje::getSetDTUsuarioViaje(std::string nickname, TipoUsuario tipo) {
     std::set<DTUsuarioViaje> dtSet;    
-    if (this->vehiculo != nullptr) {        
-        dtSet.insert(this->vehiculo->getDTUsuarioViaje());
-    }    
+    dtSet.insert(this->vehiculo->getDTUsuarioViaje());
     for (auto r : this->reservas){
         if (r != nullptr) {
             dtSet.insert(r->getDTUsuarioViaje());
