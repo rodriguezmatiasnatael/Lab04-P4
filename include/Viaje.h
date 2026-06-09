@@ -21,7 +21,7 @@ private:
     int asientosPublicados;
     float precio;
     Vehiculo* vehiculo;
-    std::set<Reserva*> resevas;
+    std::set<Reserva*> reservas;
 public:
     Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio);
     ~Viaje();
