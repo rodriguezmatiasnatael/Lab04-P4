@@ -12,31 +12,31 @@ Viaje::Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino,
 }
 
 Viaje::~Viaje() {
-    for (auto r : this->resevas) { 
+    for (auto r : this->reservas) { 
         if (r != nullptr) {
             delete r;
         }
     }    
-    this->resevas.clear();
+    this->reservas.clear();
 }
 
 DTFecha Viaje::getFecha() {
     return this->fecha;
 }
 
-int Viaje::lugaresDisponibles(int cant) {
-    int ocupados = 0;
-    for (auto r : this->resevas) {
-        if (r != nullptr) {            
-            ocupados += r->getAsientosReservados(); 
+int Viaje::lugaresDisponibles(int asientos){
+    int asientosReservados = 0;
+    for (auto r : this->reservas){
+        if (r != nullptr){
+            asientosReservados += r->getAsientosReservados(); 
         }
     }
-    return this->asientosPublicados - ocupados;
+    return this->asientosPublicados - (asientosReservados + asientos);
 }
 
-bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int cant) {    
+bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int asientos){  
     bool coincideRuta = (this->fecha == f) && (this->origen == orig) && (this->destino == dest);
-    bool hayLugar = (this->lugaresDisponibles(cant) >= cant);
+    bool hayLugar = (this->lugaresDisponibles(asientos) >= 0);
     
     if (coincideRuta && hayLugar) {
         return true;
@@ -44,13 +44,13 @@ bool Viaje::cumpleRequisitos(DTFecha f, std::string orig, std::string dest, int 
     return false;
 }
 
-DTConsultaViaje Viaje::getDTConsultaViaje(DTFecha f, std::string orig, std::string dest, int cant) {
+DTConsultaViaje Viaje::getDTConsultaViaje(DTFecha f, std::string orig, std::string dest, int asientos){
     DTConsultaViaje dt = DTConsultaViaje(this->codigo, this->fecha, this->origen, this->destino, this->precio, this->asientosPublicados);
     return dt;
 }
 
 bool Viaje::existeReservaUsuario(std::string nickname) {
-    for (auto r : this->resevas) {
+    for (auto r : this->reservas) {
         if (r != nullptr) {            
             if (r->laRealizo(nickname)) { 
                 return true;
@@ -87,7 +87,7 @@ std::set<DTUsuarioViaje> Viaje::getSetDTUsuarioViaje(std::string nickname, TipoU
     if (this->vehiculo != nullptr) {        
         dtSet.insert(this->vehiculo->getDTUsuarioViaje());
     }    
-    for (auto r : this->resevas) {
+    for (auto r : this->reservas){
         if (r != nullptr) {
             dtSet.insert(r->getDTUsuarioViaje());
         }
@@ -96,7 +96,7 @@ std::set<DTUsuarioViaje> Viaje::getSetDTUsuarioViaje(std::string nickname, TipoU
 }
 
 bool Viaje::existeCalificacion(std::string nick1, std::string nick2) {
-    for (auto r : this->resevas) {
+    for (auto r : this->reservas) {
         if (r != nullptr) {            
             if (r->hayCalificacion(nick1, nick2)) {
                 return true;
@@ -115,7 +115,7 @@ Reserva* Viaje::obtenerReserva(std::string nick1, std::string nick2, TipoUsuario
         nickPasajero = nick1;
     }
 
-    for (auto r : this->resevas) {
+    for (auto r : this->reservas) {
         if (r != nullptr) {            
             if (r->laRealizo(nickPasajero)) {
                 return r; 
@@ -123,5 +123,6 @@ Reserva* Viaje::obtenerReserva(std::string nick1, std::string nick2, TipoUsuario
         }
     }
     
-    return nullptr; // 
+    return nullptr;
 }
+
