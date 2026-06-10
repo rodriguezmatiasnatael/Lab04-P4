@@ -35,7 +35,7 @@ public:
     DTVehiculosConductor getDTVehiculoConductor();
     bool hayViajeConductor(DTFecha);
     bool hayViajesFecha(DTFecha);
-    void asociarViaje(Viaje&);
+    void asociarViaje(Viaje*);
 };
 
 #endif

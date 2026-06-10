@@ -12,6 +12,9 @@
 #include "Vehiculo.h"
 #include "Usuario.h"
 #include "Reserva.h"
+#include "Conductor.h"
+#include "Pasajero.h"
+
 
 #include "DTUsuarioViaje.h"
 #include "DTVehiculosConductor.h"
@@ -20,15 +23,17 @@
 #include "Viaje.h"
 #include "IControladorFechaActual.h"
 
-
 class ControladorViaje{
 private:
     ManejadorVehiculos* mve;
     ManejadorUsuarios* mu;
     ManejadorViajes* mvi;
-    //std::string nickname;  ERROR, no?
-    //int codigo;
-public:
+    std::string nicknameR;
+    int codigoR;
+
+    public:
+    void setNicknameR(std::string);
+    void setCodigoR(int);
     std::set<std::string> listarPasajeros();
     std::set<DTConsultaViaje> consultarViajes(DTFecha,std::string,std::string,int);
     bool generarReserva(std::string,int,int);
@@ -36,7 +41,7 @@ public:
     std::set<DTListarViaje> listarViajes(std::string);
     std::set<DTUsuarioViaje> listarUsuariosViaje(int);
     bool calificarUsuario(std::string,int);
-    std::set<DTVehiculosConductor> listarVehiculos(std::string);
+    std::set<DTVehiculosConductor> listarVehiculosConductor(std::string);
     bool altaViaje(std::string,DTFecha,std::string,std::string,int,float);
 };
 

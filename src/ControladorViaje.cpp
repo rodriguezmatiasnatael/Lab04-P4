@@ -6,6 +6,14 @@ ControladorViaje::ControladorViaje(){
     this->mvi = ManejadorViajes::getInstance();
 }
 
+void ControladorViaje:: setNicknameR(std::string nickname){
+    this->nicknameR = nickname;
+}
+
+void ControladorViaje:: setCodigoR(int codigo){
+    this->codigoR = codigo;
+}
+
 std::set<std::string> ControladorViaje::listarPasajeros(){
     std::set<Usuario*> usuarios = mu->getUsuarios();
     std::set<std::string> res;
@@ -60,62 +68,82 @@ std::set<DTUsuario> ControladorViaje::listarUsuarios(){
     return res;
 }
 
-/*
+
 std::set<DTListarViaje> ControladorViaje:: listarViajes(std::string nickname){
+    setNicknameR(nickname);
+    std::set<DTListarViaje> res;
     std::set<Viaje*> viajes = mvi->getViajes();
-    Pasajero* pas = dynamic_cast<Pasajero*>()
     for (auto v : viajes) {
-
-    }
-}
-
-
-std::set<DTUsuarioViaje> listarUsuariosViaje(int);
-bool calificarUsuario(std::string,int);
-std::set<DTVehiculosConductor> listarVehiculos(std::string);
-bool altaViaje(std::string,DTFecha,std::string,std::string,int,float);
-
-
-
-
-bool ControladorUsuario::altaPasajero(std::string nickname,std::string nombre,std::string email,std::string password,std::string ci){
-    this->mu = ManejadorUsuarios::getInstance();
-    bool estaUsuario = mu->existeUsuario(nickname);
-    if(!estaUsuario){
-        mu->crearPasajero(nickname,nombre,email,password,ci);
-    }
-    return !estaUsuario;
-}
-
-bool ControladorUsuario::altaConductor(std::string nickname,std::string nombre,std::string email,std::string password,std::set<TipoLibreta> libretas){
-    this->mu = ManejadorUsuarios::getInstance();
-    bool estaUsuario = mu->existeUsuario(nickname);
-    if(!estaUsuario){
-        mu->crearConductor(nickname,nombre,email,password,libretas);
-    }
-    return !estaUsuario;
-}
-
-int ControladorUsuario::registrarVehiculo(std::string nickname, std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo){
-    this->mu = ManejadorUsuarios::getInstance();
-    this->mve = ManejadorVehiculos::getInstance();
-    bool estaV = mve->existeVehiculo(matricula);
-    if(!estaV){
-        Usuario* c = mu->getUsuario(nickname);
-        Conductor* cond = (Conductor*)c;
-        bool estaHab = cond->estaHabilitado(tipo);
-        if(estaHab){
-            Vehiculo* v = mve->crearVehiculo(matricula,capacidad,marca,modelo,tipo);
-            v->setConductor(*cond);
-            cond->asociarVehiculo(v);
-            return 0;
-        }
-        else{
-            return -2;
+        bool ec = v->esConductor(nickname);
+        bool ep = v->esPasajero(nickname);
+        if (ec || ep){
+            DTListarViaje nodo = v->getDTListarViaje();
+            res.insert(nodo);
         }
     }
-    else{
-        return -1;
-    }
+    return res;
 }
-*/
+
+
+std::set<DTUsuarioViaje> ControladorViaje:: listarUsuariosViaje(int codigo){
+    TipoUsuario tipo;
+    setCodigoR(codigo);
+    Viaje* viaje = mvi->getViaje(codigo);
+    Usuario* us = mu->getUsuario(nicknameR);
+    Conductor* cond = dynamic_cast<Conductor*>(us);
+    if (cond = nullptr){
+        tipo = T_Pasajero;
+    } else {
+        tipo = T_Conductor;
+    }
+    return viaje->getSetDTUsuarioViaje(nicknameR, tipo);
+}
+
+bool ControladorViaje:: calificarUsuario(std::string nicknameCalificado ,int calificacion){
+    Viaje* viaje = mvi->getViaje(codigoR);
+    bool eCalificacion = viaje->existeCalificacion(nicknameR, nicknameCalificado);
+    if (!eCalificacion){
+        Usuario* puntua = mu->getUsuario(nicknameR);
+        Usuario* recibe = mu->getUsuario(nicknameCalificado);
+        TipoUsuario tPuntua;
+        Pasajero* pas = dynamic_cast<Pasajero*>(puntua);
+        if (pas = nullptr){
+            tPuntua = T_Conductor;
+        } else {
+            tPuntua = T_Pasajero;
+        }
+        Reserva* res = viaje->obtenerReserva(nicknameR, nicknameCalificado, tPuntua);
+        Calificacion* cal = res->calificar(puntua, recibe, calificacion);
+        recibe->asociarCalificacion(cal);
+    }
+    nicknameR = "";
+    codigoR = -1;
+}
+
+
+
+
+std::set<DTVehiculosConductor> ControladorViaje:: listarVehiculosConductor(std::string){
+    Usuario* usuario = mu->getUsuario(nicknameR);
+    Conductor* cond = dynamic_cast<Conductor*>(usuario);
+    return cond->listarVehiculos();
+}
+
+
+bool ControladorViaje:: altaViaje(std::string matricula,DTFecha fecha,std::string origen,std::string destino,int asientos,float precio){
+    ////////////////////////////
+    ////////////////////////////
+    Vehiculo* veh = mve->getVehiculo(matricula); ///!!!!!!! Falta implementar en manejadorVehiculos///////////////////////////////
+    ////////////////////////////
+    ////////////////////////////
+    int capacidad = veh->getCapacidad();
+    if (capacidad >= asientos){
+        bool hayVFecha = veh->hayViajeConductor(fecha);
+        if (!hayVFecha){
+            Viaje* viaje = mvi->crearViaje(veh, fecha, origen, destino, asientos, precio);
+            veh->asociarViaje(viaje);
+            return true;
+        }
+    }
+    return false;    
+}

@@ -116,6 +116,12 @@ bool Vehiculo::hayViajesFecha(DTFecha fecha){
     return false;
 }
 */
-void Vehiculo::asociarViaje(Viaje& v){
+/*void Vehiculo::asociarViaje(Viaje& v){
     this->viajes.insert(&v);
+
+
+Por que pasamos por referencia??
+*/
+void Vehiculo::asociarViaje(Viaje* v){
+    this->viajes.insert(v);
 }
