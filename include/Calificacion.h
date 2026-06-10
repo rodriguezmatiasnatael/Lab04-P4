@@ -11,8 +11,8 @@ class Calificacion {
 private:
     DTFecha fecha;
     int puntaje;
-    const Usuario *realiza;
-    const Usuario *califica;
+    Usuario *realiza;
+    Usuario *califica;
 public:
     Calificacion(DTFecha fecha, int puntaje);
     ~Calificacion();

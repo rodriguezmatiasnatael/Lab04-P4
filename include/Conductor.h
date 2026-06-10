@@ -16,8 +16,7 @@ private:
     std::set<Vehiculo*> vehiculos;
 public:
     Conductor(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::set<TipoLibreta> libs);
-    ~Conductor();
-
+    TipoUsuario getTipo();
     bool estaHabilitado(TipoVehiculo tipo);
     void asociarVehiculo(Vehiculo* v);
     int getCantCalificaciones();

@@ -7,15 +7,6 @@ Conductor::Conductor(std::string nickname, std::string nombre, std::string contr
     this->libretas = libs;
 }
 
-Conductor::~Conductor() {
-    for (auto veh : this->vehiculos) {
-        if (veh != nullptr) {
-            delete veh;
-        }
-    }    
-    this->vehiculos.clear();
-}
-
 bool Conductor::estaHabilitado(TipoVehiculo tipo){
     for (auto lib : this->libretas){
         if (tipo == TipoVehiculo::Auto){
@@ -31,6 +22,10 @@ bool Conductor::estaHabilitado(TipoVehiculo tipo){
     return false;
 }
 
+TipoUsuario Conductor::getTipo() {
+    return TipoUsuario::T_Conductor;
+}
+
 void Conductor::asociarVehiculo(Vehiculo* v){
     this->vehiculos.insert(v);
 }
@@ -41,14 +36,14 @@ int Conductor::getCantCalificaciones(){
 
 float Conductor::getCalificacionPromedio(){
     float total = 0;
-    if (this->calificaciones.size() == 0){
+    if (this->getCantCalificaciones() == 0){
         return total;
     }
     float suma = 0;
     for (auto cal : this->calificaciones){
         suma = suma + cal->getPuntaje(); //Aca da error porque queremos usar metodo de Calificacion con un forward declaration
     }
-    total = suma / this->calificaciones.size();
+    total = suma / this->getCantCalificaciones();
     return total;
 }
 
@@ -59,13 +54,10 @@ std::set<DTVehiculosConductor> Conductor::listarVehiculos(){
     }
     
     for (auto veh : this->vehiculos){
-        std::string mat;
-        std::string mod;
-        int cap;
-        mat = veh->getMatricula(); 
-        mod = veh->getModelo();
-        cap = veh->getCapacidad();
-        DTVehiculosConductor DTVeh = DTVehiculosConductor(mat, mod, cap);
+        std::string mat = veh->getMatricula(); 
+        std::string mar = veh->getMarca();
+        int cap = veh->getCapacidad();
+        DTVehiculosConductor DTVeh = DTVehiculosConductor(mat, mar, cap);
         res.insert(DTVeh);
     }
     return res;

@@ -10,15 +10,6 @@ Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasen
     this->calificaciones.clear();
 }
 
-Usuario::~Usuario() {
-    for (auto c : this->calificaciones) {
-        if (c != nullptr) {
-            delete c;
-        }
-    }
-    this->calificaciones.clear();
-}
-
 std::string Usuario::getNickname() const {
     return this->nickname;
 }
@@ -50,4 +41,8 @@ float Usuario::getCalificacionPromedio() {
     }
 
     return suma / this->calificaciones.size();
+}
+
+void Usuario::eliminarCalificacion(Calificacion* c) {
+    this->calificaciones.erase(c);
 }

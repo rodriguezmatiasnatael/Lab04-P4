@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 #include <set>
-#include "Usuario.h"
+#include "Conductor.h"
+#include "Pasajero.h"
 #include "TipoLibreta.h"
 
 class ManejadorUsuarios {

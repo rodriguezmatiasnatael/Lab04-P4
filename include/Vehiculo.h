@@ -22,12 +22,11 @@ private:
     std::set<Viaje*> viajes;
 public:
     Vehiculo(std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo);
-    ~Vehiculo();
     std::string getMatricula();
     std::string getMarca();
     std::string getModelo();
     int getCapacidad();    
-    void setConductor(Conductor&);
+    void setConductor(Conductor*);
     std::string nicknamePropietario();
     std::string nombreConductor();
     float calPromConductor();
@@ -35,7 +34,7 @@ public:
     DTVehiculosConductor getDTVehiculoConductor();
     bool hayViajeConductor(DTFecha);
     bool hayViajesFecha(DTFecha);
-    void asociarViaje(Viaje&);
+    void asociarViaje(Viaje*);
 };
 
 #endif

@@ -6,8 +6,7 @@ ControladorUsuario::ControladorUsuario(){
 }
 
 bool ControladorUsuario::altaPasajero(std::string nickname,std::string nombre,std::string email,std::string password,std::string ci){
-    this->mu = ManejadorUsuarios::getInstance();
-    bool estaUsuario = mu->existeUsuario(nickname);
+    bool estaUsuario = this->mu->existeUsuario(nickname);
     if(!estaUsuario){
         mu->crearPasajero(nickname,nombre,email,password,ci);
     }
@@ -15,8 +14,7 @@ bool ControladorUsuario::altaPasajero(std::string nickname,std::string nombre,st
 }
 
 bool ControladorUsuario::altaConductor(std::string nickname,std::string nombre,std::string email,std::string password,std::set<TipoLibreta> libretas){
-    this->mu = ManejadorUsuarios::getInstance();
-    bool estaUsuario = mu->existeUsuario(nickname);
+    bool estaUsuario = this->mu->existeUsuario(nickname);
     if(!estaUsuario){
         mu->crearConductor(nickname,nombre,email,password,libretas);
     }
@@ -24,16 +22,14 @@ bool ControladorUsuario::altaConductor(std::string nickname,std::string nombre,s
 }
 
 int ControladorUsuario::registrarVehiculo(std::string nickname, std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo){
-    this->mu = ManejadorUsuarios::getInstance();
-    this->mve = ManejadorVehiculos::getInstance();
-    bool estaV = mve->existeVehiculo(matricula);
+    bool estaV = this->mve->existeVehiculo(matricula);
     if(!estaV){
-        Usuario* c = mu->getUsuario(nickname);
-        Conductor* cond = (Conductor*)c;
+        Usuario* u = this->mu->getUsuario(nickname);
+        Conductor* cond = dynamic_cast<Conductor*>(u);
         bool estaHab = cond->estaHabilitado(tipo);
         if(estaHab){
-            Vehiculo* v = mve->crearVehiculo(matricula,capacidad,marca,modelo,tipo);
-            v->setConductor(*cond);
+            Vehiculo* v = mve->crearVehiculo(matricula, capacidad, marca, modelo, tipo);
+            v->setConductor(cond);
             cond->asociarVehiculo(v);
             return 0;
         }

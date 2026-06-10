@@ -1,17 +1,14 @@
 #ifndef CONTROLADORUSUARIO_H
 #define CONTROLADORUSUARIO_H
 
-#include <iostream>
-#include <string>
-#include <set>
-#include "TipoLibreta.h"
-#include "TipoVehiculo.h"
 #include "Conductor.h"
 #include "Vehiculo.h"
 #include "ManejadorUsuarios.h"
 #include "ManejadorVehiculos.h"
 
-class ControladorUsuario {
+#include "./IControladorUsuario.h"
+
+class ControladorUsuario: public IControladorUsuario {
 private:
     static ManejadorUsuarios* mu;
     static ManejadorVehiculos* mve;

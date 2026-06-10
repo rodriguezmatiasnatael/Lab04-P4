@@ -6,15 +6,17 @@ Calificacion::Calificacion(DTFecha fecha, int puntaje) {
     this->puntaje = puntaje;
 }
 
-Calificacion::~Calificacion() {}
+Calificacion::~Calificacion() {
+    this->califica->eliminarCalificacion(this);
+}
 
 int Calificacion::getPuntaje(){
     return this->puntaje;
 }
 
-bool Calificacion::calificacionEncontrada(std::string Calificador, std::string Calificado){
-    bool coincideCalificador = this->realiza->getNickname() == Calificador;
-    bool coincideCalificado = this->califica->getNickname() == Calificado;
+bool Calificacion::calificacionEncontrada(std::string nickCalificador, std::string nickCalificado){
+    bool coincideCalificador = this->realiza->getNickname() == nickCalificador;
+    bool coincideCalificado = this->califica->getNickname() == nickCalificado;
     return (coincideCalificado && coincideCalificador);
 }
 

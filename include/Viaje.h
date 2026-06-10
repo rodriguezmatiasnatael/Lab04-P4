@@ -26,11 +26,11 @@ public:
     Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio);
     ~Viaje();
 
+    int getCodigo();
     DTFecha getFecha();
     int lugaresDisponibles(int);
     bool cumpleRequisitos(DTFecha, std::string, std::string, int);
-    DTConsultaViaje getDTConsultaViaje(DTFecha, std::string, std::string, int);
-    bool existeReservaUsuario(std::string);
+    DTConsultaViaje getDTConsultaViaje(int);
     Reserva* agregarReserva(int, DTFecha);
     bool esConductor(std::string);
     bool esPasajero(std::string);

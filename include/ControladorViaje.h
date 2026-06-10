@@ -1,5 +1,6 @@
 #ifndef CONTROLADORVIAJE_H
 #define CONTROLADORVIAJE_H
+
 #include <iostream>
 #include <string>
 #include <set>
@@ -12,12 +13,8 @@
 #include "Vehiculo.h"
 #include "Usuario.h"
 #include "Reserva.h"
-
-#include "DTUsuarioViaje.h"
-#include "DTVehiculosConductor.h"
-#include "DTFecha.h"
-#include "DTUsuario.h"
 #include "Viaje.h"
+
 #include "IControladorFechaActual.h"
 
 
@@ -26,9 +23,13 @@ private:
     ManejadorVehiculos* mve;
     ManejadorUsuarios* mu;
     ManejadorViajes* mvi;
-    //std::string nickname;  ERROR, no?
-    //int codigo;
+    std::string nickname;
+    int codigo;
 public:
+    std::string getNickname();
+    int getCodigo();
+    void setNickname(std::string);
+    void setCodigo(int);
     std::set<std::string> listarPasajeros();
     std::set<DTConsultaViaje> consultarViajes(DTFecha,std::string,std::string,int);
     bool generarReserva(std::string,int,int);

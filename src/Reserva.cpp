@@ -9,39 +9,34 @@ void Reserva::setPasajero(Pasajero* p){
 }
 
 bool Reserva::laRealizo(std::string nickname){
-    bool laCreo = this->pasajero->getNickname() == nickname;
-    return laCreo;
+    return this->pasajero->getNickname() == nickname;
 }
 
 DTUsuarioViaje Reserva::getDTUsuarioViaje() {
-    std::string nick = this->pasajero->getNickname();
-    return DTUsuarioViaje(nick, T_Pasajero);
+    return DTUsuarioViaje(this->pasajero->getNickname(), T_Pasajero);
 }
 
-bool Reserva::hayCalificacion(std::string calificador,std::string calificado) {
+bool Reserva::hayCalificacion(std::string nickCalificador,std::string nickCalificado) {
     for (auto cal : this->calificaciones){
-        if (cal->calificacionEncontrada(calificador, calificado)){
+        if (cal->calificacionEncontrada(nickCalificador, nickCalificado)){
             return true;
         }
     }
     return false;
 }
 
-Calificacion* Reserva::calificar(/*std::string nickname,*/ Usuario* puntua, Usuario* recibe, int puntaje){
+Calificacion* Reserva::calificar(Usuario* puntua, Usuario* recibe, int puntaje){
     DTFecha fechaActual = ControladorFechaActual::getInstance()->getFecha();  
-    Calificacion * cal = new Calificacion(fechaActual, puntaje);
-    this->calificaciones.insert(cal);
+    Calificacion* cal = new Calificacion(fechaActual, puntaje);
     cal->setRealiza(puntua);
     cal->setCalifica(recibe);
+    this->calificaciones.insert(cal);
     return cal;
 }
 
-
 Reserva::~Reserva() {
     for (auto cal : this->calificaciones){
-        if (cal != nullptr){
-            delete cal;
-        }
+        delete cal;
     }
     this->calificaciones.clear();
 }
