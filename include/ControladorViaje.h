@@ -9,17 +9,15 @@
 #include "ManejadorUsuarios.h"
 #include "ManejadorViajes.h"
 
-#include "ControladorFechaActual.h"
 #include "Vehiculo.h"
 #include "Usuario.h"
 #include "Reserva.h"
 #include "Viaje.h"
 
-#include "IControladorFechaActual.h"
+#include "ControladorFechaActual.h"
+#include "IControladorViaje.h"
 
-#include "DTDetalleViaje.h"
-
-class ControladorViaje{
+class ControladorViaje: public IControladorViaje {
 private:
     ManejadorVehiculos* mve;
     ManejadorUsuarios* mu;
