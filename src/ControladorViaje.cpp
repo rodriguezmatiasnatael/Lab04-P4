@@ -6,6 +6,14 @@ ControladorViaje::ControladorViaje(){
     this->mvi = ManejadorViajes::getInstance();
 }
 
+std::string ControladorViaje::getNickname() {
+    return this->nickname;
+}
+
+int ControladorViaje::getCodigo() {
+    return this->codigo;
+}
+
 void ControladorViaje::setNickname(std::string nickname){
     this->nickname = nickname;
 }
@@ -39,11 +47,6 @@ std::set<DTConsultaViaje> ControladorViaje::consultarViajes(DTFecha fecha,std::s
     return res;
 }
 
-//SOBRECARGAR EL OPERADOR < para que inserte los DTConsultaViaje ordenados.
-// El listado se presenta ordenado de menor a
-// mayor precio total, y en caso de empate se debe mostrar primero el de mayor
-// calificación promedio.
-
 
 bool ControladorViaje:: generarReserva(std::string nickname,int codigo,int asientos){
     DTFecha fechaActual = ControladorFechaActual::getInstance()->getFecha();
@@ -55,6 +58,7 @@ bool ControladorViaje:: generarReserva(std::string nickname,int codigo,int asien
         Pasajero* p = dynamic_cast<Pasajero*>(mu->getUsuario(nickname));
         reserva->setPasajero(p);
     }
+    return (!hayReserva && lugDisp >= 0);
 }
 
 std::set<DTUsuario> ControladorViaje::listarUsuarios(){
@@ -85,16 +89,10 @@ std::set<DTListarViaje> ControladorViaje:: listarViajes(std::string nickname){
 
 
 std::set<DTUsuarioViaje> ControladorViaje:: listarUsuariosViaje(int codigo){
-    TipoUsuario tipo;
     this->setCodigo(codigo);
     Viaje* viaje = mvi->getViaje(codigo);
     Usuario* us = mu->getUsuario(nickname);
-    Conductor* cond = dynamic_cast<Conductor*>(us);
-    if (cond = nullptr){
-        tipo = T_Pasajero;
-    } else {
-        tipo = T_Conductor;
-    }
+    TipoUsuario tipo = us->getTipo();
     return viaje->getSetDTUsuarioViaje(nickname, tipo);
 }
 
@@ -104,30 +102,21 @@ bool ControladorViaje:: calificarUsuario(std::string nicknameCalificado ,int cal
     if (!eCalificacion){
         Usuario* puntua = mu->getUsuario(nickname);
         Usuario* recibe = mu->getUsuario(nicknameCalificado);
-        TipoUsuario tPuntua;
-        Pasajero* pas = dynamic_cast<Pasajero*>(puntua);
-        if (pas = nullptr){
-            tPuntua = T_Conductor;
-        } else {
-            tPuntua = T_Pasajero;
-        }
+        TipoUsuario tPuntua = puntua->getTipo(); 
         Reserva* res = viaje->obtenerReserva(nickname, nicknameCalificado, tPuntua);
         Calificacion* cal = res->calificar(puntua, recibe, calificacion);
         recibe->asociarCalificacion(cal);
     }
-    nickname = "";
-    codigo = -1;
+    this->setNickname("");
+    this->setCodigo(-1);
+    return !eCalificacion;
 }
-
-
-
 
 std::set<DTVehiculosConductor> ControladorViaje::listarVehiculosConductor(std::string nickname){
     Usuario* usuario = mu->getUsuario(nickname);
     Conductor* cond = dynamic_cast<Conductor*>(usuario);
     return cond->listarVehiculos();
 }
-
 
 bool ControladorViaje:: altaViaje(std::string matricula,DTFecha fecha,std::string origen,std::string destino,int asientos,float precio){
     Vehiculo* veh = this->mve->getVehiculo(matricula);
@@ -162,4 +151,9 @@ void ControladorViaje::eliminarViaje() {
     int codigo = this->getCodigo();
     Viaje* vi = this->mvi->getViaje(codigo);
     delete vi;
+    this->setCodigo(-1);
+}
+
+void ControladorViaje::cancelarEliminarViaje() {
+    this->setCodigo(-1);
 }

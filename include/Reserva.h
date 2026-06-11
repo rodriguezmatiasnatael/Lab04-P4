@@ -3,11 +3,15 @@
 
 #include <iostream>
 #include <string>
-#include "Pasajero.h"
-#include "DTFecha.h"
-#include "DTUsuarioViaje.h"
-#include "Calificacion.h"
+
 #include "ControladorFechaActual.h"
+
+#include "Pasajero.h"
+#include "Calificacion.h"
+
+#include "DTUsuarioViaje.h"
+#include "DTFecha.h"
+#include "DTDetalleReserva.h"
 
 class Reserva {
 private:

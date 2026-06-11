@@ -3,12 +3,16 @@
 
 #include "DTFecha.h"
 #include <string>
+#include "ControladorFechaActual.h"
+
 #include "Reserva.h"
+
+#include "DTDetalleViaje.h"
+#include "DTDetalleReserva.h"
 #include "DTFecha.h"
 #include "DTConsultaViaje.h"
 #include "DTListarViaje.h"
 #include "TipoUsuario.h"
-#include "ControladorFechaActual.h"
 
 class Vehiculo;
 

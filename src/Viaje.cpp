@@ -1,6 +1,5 @@
 #include "../include/Viaje.h"
 #include "../include/Vehiculo.h"
-#include "../include/DTDetalleViaje.h"
 
 int Viaje::ultimoCodigo = 0;
 Viaje::Viaje(Vehiculo* v,DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio) {
