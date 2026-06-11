@@ -17,6 +17,7 @@ public:
     std::set<Viaje*> getViajes();
     Viaje* getViaje(int);
     Viaje* crearViaje(Vehiculo*,DTFecha,std::string,std::string,int,float);
+    void borrarViaje(Viaje*);
 };
 
 #endif

@@ -150,6 +150,7 @@ DTDetalleViaje ControladorViaje::detalleViaje(int codigo){
 void ControladorViaje::eliminarViaje() {
     int codigo = this->getCodigo();
     Viaje* vi = this->mvi->getViaje(codigo);
+    this->mvi->borrarViaje(vi);
     delete vi;
     this->setCodigo(-1);
 }
