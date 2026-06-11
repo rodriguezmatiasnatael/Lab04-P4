@@ -43,6 +43,6 @@ float Usuario::getCalificacionPromedio() {
     return suma / this->calificaciones.size();
 }
 
-void Usuario::eliminarCalificacion(Calificacion* c) {
+void Usuario::borrarCalificacion(Calificacion* c) {
     this->calificaciones.erase(c);
 }

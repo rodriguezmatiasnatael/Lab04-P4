@@ -16,6 +16,7 @@ public:
     static ManejadorVehiculos* getInstance();
     bool existeVehiculo(std::string);
     Vehiculo* crearVehiculo(std::string,int,std::string,std::string,TipoVehiculo);
+    Vehiculo* getVehiculo(std::string);
 };
 
 #endif

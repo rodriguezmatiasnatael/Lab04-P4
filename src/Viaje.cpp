@@ -1,24 +1,27 @@
 #include "../include/Viaje.h"
 #include "../include/Vehiculo.h"
+#include "../include/DTDetalleViaje.h"
 
-Viaje::Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio) {
-    this->codigo = codigo;
-    this->fecha = fecha;
+int Viaje::ultimoCodigo = 0;
+Viaje::Viaje(Vehiculo* v,DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio) {
+    this->vehiculo = v;
     this->origen = origen;
+    this->fecha = fecha;
     this->destino = destino;
     this->asientosPublicados = asientosPublicados;
     this->precio = precio;
     this->vehiculo = nullptr;
+    //seteamos codigo
+    this->codigo = ultimoCodigo + 1;
+    ultimoCodigo++;
+    v->asociarViaje(this);
 }
 
-// Viaje::~Viaje() {
-//     for (auto r : this->reservas) { 
-//         if (r != nullptr) {
-//             delete r;
-//         }
-//     }    
-//     this->reservas.clear();
-// }
+Viaje::~Viaje() {
+    this->vehiculo->borrarViaje(this);
+    for (auto r : this->reservas) delete r;
+    this->reservas.clear();
+}
 
 int Viaje::getCodigo() {
     return this->codigo;
@@ -118,4 +121,14 @@ Reserva* Viaje::obtenerReserva(std::string nickCalificador, std::string nickCali
         }
     }    
     return nullptr;
+}
+
+DTDetalleViaje Viaje::getDTDetalleViaje(){
+    DTDetalleVehiculo dtv = this->vehiculo->getDTDetalleVehiculo();
+    std::vector<DTDetalleReserva> dtres;
+    for (auto r : this->reservas) {
+        dtres.push_back(r->getDTDetalleReserva());
+    }
+    DTDetalleViaje dt = DTDetalleViaje(this->codigo, this->fecha, this->origen, this->destino, this->asientosPublicados, this->precio, dtv, dtres);
+    return dt;
 }

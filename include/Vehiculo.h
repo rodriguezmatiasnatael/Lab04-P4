@@ -7,6 +7,7 @@
 #include "DTVehiculosConductor.h"
 #include "DTUsuarioViaje.h"
 #include "DTFecha.h"
+#include "DTDetalleVehiculo.h"
 
 class Conductor;
 class Viaje;
@@ -35,6 +36,8 @@ public:
     bool hayViajeConductor(DTFecha);
     bool hayViajesFecha(DTFecha);
     void asociarViaje(Viaje*);
+    void borrarViaje(Viaje*);
+    DTDetalleVehiculo getDTDetalleVehiculo();
 };
 
 #endif

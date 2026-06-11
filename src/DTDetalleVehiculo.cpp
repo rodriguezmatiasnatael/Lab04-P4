@@ -1,7 +1,6 @@
 #include "../include/DTDetalleVehiculo.h"
 
-DTDetalleVehiculo::DTDetalleVehiculo(std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo)
-    {
+DTDetalleVehiculo::DTDetalleVehiculo(std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo){
     this->matricula = matricula;
     this->capacidad = capacidad;
     this->marca = marca;
@@ -14,3 +13,8 @@ int DTDetalleVehiculo::getCapacidad() { return capacidad; }
 std::string DTDetalleVehiculo::getMarca() { return marca; }
 std::string DTDetalleVehiculo::getModelo() { return modelo; }
 TipoVehiculo DTDetalleVehiculo::getTipo() { return tipo; }
+
+
+bool DTDetalleVehiculo::operator<(const DTDetalleVehiculo& otro) const {
+    return this->matricula < otro.matricula;
+}

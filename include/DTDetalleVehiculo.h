@@ -20,6 +20,8 @@ public:
     std::string getMarca();
     std::string getModelo();
     TipoVehiculo getTipo();
+
+    bool operator<(const DTDetalleVehiculo& otro) const;
 };
 
 #endif

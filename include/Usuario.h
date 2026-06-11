@@ -24,7 +24,7 @@ public:
     float getCalificacionPromedio();
     DTUsuario getDTUsuario();
     void asociarCalificacion(Calificacion*);
-    void eliminarCalificacion(Calificacion*);
+    void borrarCalificacion(Calificacion*);
 };
 
 #endif

@@ -122,7 +122,7 @@ bool ControladorViaje:: calificarUsuario(std::string nicknameCalificado ,int cal
 
 
 
-std::set<DTVehiculosConductor> ControladorViaje:: listarVehiculosConductor(std::string){
+std::set<DTVehiculosConductor> ControladorViaje::listarVehiculosConductor(std::string nickname){
     Usuario* usuario = mu->getUsuario(nickname);
     Conductor* cond = dynamic_cast<Conductor*>(usuario);
     return cond->listarVehiculos();
@@ -130,11 +130,7 @@ std::set<DTVehiculosConductor> ControladorViaje:: listarVehiculosConductor(std::
 
 
 bool ControladorViaje:: altaViaje(std::string matricula,DTFecha fecha,std::string origen,std::string destino,int asientos,float precio){
-    ////////////////////////////
-    ////////////////////////////
-    Vehiculo* veh = mve->getVehiculo(matricula); ///!!!!!!! Falta implementar en manejadorVehiculos///////////////////////////////
-    ////////////////////////////
-    ////////////////////////////
+    Vehiculo* veh = this->mve->getVehiculo(matricula);
     int capacidad = veh->getCapacidad();
     if (capacidad >= asientos){
         bool hayVFecha = veh->hayViajeConductor(fecha);
@@ -144,5 +140,26 @@ bool ControladorViaje:: altaViaje(std::string matricula,DTFecha fecha,std::strin
             return true;
         }
     }
-    return false;    
+    return false;
+}
+
+std::set<DTListarViaje> ControladorViaje::listarViajes(){
+    std::set<DTListarViaje> s;
+    std::set<Viaje*> viajes = mvi->getViajes();
+    for (auto v : viajes) {
+        s.insert(v->getDTListarViaje());
+    }
+    return s;
+}
+
+DTDetalleViaje ControladorViaje::detalleViaje(int codigo){
+    Viaje* v = mvi->getViaje(codigo);
+    return v->getDTDetalleViaje();
+    setCodigo(codigo);
+}
+
+void ControladorViaje::eliminarViaje() {
+    int codigo = this->getCodigo();
+    Viaje* vi = this->mvi->getViaje(codigo);
+    delete vi;
 }

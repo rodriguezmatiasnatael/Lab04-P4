@@ -16,7 +16,7 @@ public:
     static ManejadorViajes* getInstance();
     std::set<Viaje*> getViajes();
     Viaje* getViaje(int);
-    Viaje crearViaje(Vehiculo&,DTFecha,std::string,std::string,int,float);
+    Viaje* crearViaje(Vehiculo*,DTFecha,std::string,std::string,int,float);
 };
 
 #endif

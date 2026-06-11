@@ -14,6 +14,7 @@ class Vehiculo;
 
 class Viaje {
 private:
+    static int ultimoCodigo;
     int codigo;
     DTFecha fecha;
     std::string origen;
@@ -23,11 +24,12 @@ private:
     Vehiculo* vehiculo;
     std::set<Reserva*> reservas;
 public:
-    Viaje(int codigo, DTFecha fecha, std::string origen, std::string destino, int asientosPublicados, float precio);
+    Viaje(Vehiculo*,DTFecha, std::string, std::string, int, float);
     ~Viaje();
 
     int getCodigo();
     DTFecha getFecha();
+    DTDetalleViaje getDTDetalleViaje();
     int lugaresDisponibles(int);
     bool cumpleRequisitos(DTFecha, std::string, std::string, int);
     DTConsultaViaje getDTConsultaViaje(int);

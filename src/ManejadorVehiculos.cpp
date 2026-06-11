@@ -15,7 +15,6 @@ ManejadorVehiculos * ManejadorVehiculos::getInstance(){
 
 
 bool ManejadorVehiculos::existeVehiculo(std::string matricula){
-    bool existe = false;
     for (auto v : this->vehiculos){
         if (v != nullptr){
             if(v->getMatricula() == matricula){
@@ -23,7 +22,6 @@ bool ManejadorVehiculos::existeVehiculo(std::string matricula){
             }
         }
     }
-    return existe;
 }
 
 
@@ -31,4 +29,15 @@ Vehiculo* ManejadorVehiculos::crearVehiculo(std::string matricula, int capacidad
     Vehiculo* v = new Vehiculo(matricula,capacidad,marca,modelo,tipo);
     this->vehiculos.insert(v);
     return v;
+}
+
+Vehiculo* ManejadorVehiculos::getVehiculo(std::string matricula){
+    for (auto v : this->vehiculos){
+        if (v != nullptr){
+            if(v->getMatricula() == matricula){
+                return v;
+            }
+        }
+    }
+    return nullptr;
 }

@@ -14,6 +14,8 @@ public:
 
     std::string getNickname();
     TipoUsuario getTipo();
+
+    bool operator<(const DTUsuarioViaje& otro) const;
 };
 
 #endif

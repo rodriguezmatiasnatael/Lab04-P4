@@ -22,11 +22,8 @@ public:
   std::string getConductor();
   float getCalificacionProm();
   float getPrecioTotal();
-};
 
-//SOBRECARGAR EL OPERADOR < para que inserte los DTConsultaViaje ordenados.
-// El listado se presenta ordenado de menor a
-// mayor precio total, y en caso de empate se debe mostrar primero el de mayor
-// calificación promedio.
+  bool operator<(const DTConsultaViaje& otro) const;
+};
 
 #endif

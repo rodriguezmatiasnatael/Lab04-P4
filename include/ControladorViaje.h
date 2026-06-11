@@ -17,6 +17,7 @@
 
 #include "IControladorFechaActual.h"
 
+#include "DTDetalleViaje.h"
 
 class ControladorViaje{
 private:
@@ -39,6 +40,11 @@ public:
     bool calificarUsuario(std::string,int);
     std::set<DTVehiculosConductor> listarVehiculos(std::string);
     bool altaViaje(std::string,DTFecha,std::string,std::string,int,float);
+    std::set<DTVehiculosConductor> listarVehiculosConductor(std::string);
+    std::set<DTListarViaje> listarViajes();
+    DTDetalleViaje detalleViaje(int);
+    void eliminarViaje();
+    void cancelarEliminarViaje();
 };
 
 #endif

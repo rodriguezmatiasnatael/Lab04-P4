@@ -29,6 +29,8 @@ public:
     float getPrecio();
     DTDetalleVehiculo getVehiculo();
     std::vector<DTDetalleReserva> getReservas();
+
+    bool operator<(const DTDetalleViaje& otro) const;
 };
 
 #endif

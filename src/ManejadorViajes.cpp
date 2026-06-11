@@ -25,8 +25,9 @@ Viaje *ManejadorViajes::getViaje(int codigo){
         }
     }
 }
-/*
-Viaje ManejadorViajes::crearViaje(Vehiculo vehiculo,DTFecha fecha, std::string origen,std::string destino, int asientosPublicados ,float precio){
 
+
+Viaje* ManejadorViajes::crearViaje(Vehiculo* vehiculo,DTFecha fecha, std::string origen,std::string destino, int asientosPublicados ,float precio){
+
+    Viaje* v = new Viaje(vehiculo,fecha,origen,destino,asientosPublicados,precio);
 }
-*/

@@ -2,6 +2,7 @@
 #include "../include/Conductor.h"
 #include "../include/Viaje.h"
 
+#include "../include/DTDetalleVehiculo.h"
 Vehiculo::Vehiculo(std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo) {
     this->matricula = matricula;
     this->capacidad = capacidad;
@@ -62,4 +63,13 @@ bool Vehiculo::hayViajesFecha(DTFecha fecha){
 
 void Vehiculo::asociarViaje(Viaje* v){
     this->viajes.insert(v); // Lo mismo que en setConductor
+}
+
+void Vehiculo::borrarViaje(Viaje* v) {
+    this->viajes.erase(v);
+}
+
+DTDetalleVehiculo Vehiculo::getDTDetalleVehiculo(){
+    DTDetalleVehiculo dtv = DTDetalleVehiculo(this->matricula, this->capacidad,this->marca, this->modelo, this->tipo);
+    return dtv;
 }

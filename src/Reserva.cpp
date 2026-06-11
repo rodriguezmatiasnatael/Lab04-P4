@@ -1,9 +1,18 @@
 #include "../include/Reserva.h"
+#include "../include/DTDetalleReserva.h"
 
 Reserva::Reserva(int asientosReservados, DTFecha fecha) {
     this->asientosReservados = asientosReservados;
     this->fecha = fecha;
 }
+
+Reserva::~Reserva() {
+    for (auto cal : this->calificaciones){
+        delete cal;
+    }
+    this->calificaciones.clear();
+}
+
 void Reserva::setPasajero(Pasajero* p){
     this->pasajero = p;
 }
@@ -34,9 +43,8 @@ Calificacion* Reserva::calificar(Usuario* puntua, Usuario* recibe, int puntaje){
     return cal;
 }
 
-Reserva::~Reserva() {
-    for (auto cal : this->calificaciones){
-        delete cal;
-    }
-    this->calificaciones.clear();
+
+DTDetalleReserva Reserva::getDTDetalleReserva(){
+    DTDetalleReserva dt = DTDetalleReserva(this->asientosReservados, this->fecha, this->pasajero->getNickname());
+    return dt;
 }

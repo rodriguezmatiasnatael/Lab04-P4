@@ -24,6 +24,7 @@ public:
     DTUsuarioViaje getDTUsuarioViaje();
     bool hayCalificacion(std::string calificador, std::string calificado);
     Calificacion* calificar(/*std::string nickname,*/ Usuario* puntua, Usuario* recibe, int puntaje);
+    DTDetalleReserva getDTDetalleReserva();
 };
 
 #endif
