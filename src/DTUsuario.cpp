@@ -10,5 +10,5 @@ std::string DTUsuario::getNickname() { return nickname; }
 std::string DTUsuario::getNombre() { return nombre; }
 
 bool DTUsuario::operator<(const DTUsuario& otro) const {
-    this->nickname < otro.nickname;
+    return this->nickname < otro.nickname;
 }

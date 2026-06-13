@@ -9,9 +9,10 @@
 
 class IControladorUsuario {
 public:
-     virtual bool altaPasajero(std::string, std::string, std::string, std::string, std::string);
-     virtual bool altaConductor(std::string, std::string, std::string, std::string, std::set<TipoLibreta>);
-     virtual int registrarVehiculo(std::string, std::string, int, std::string, std::string, TipoVehiculo);
+     virtual ~IControladorUsuario() {};
+     virtual bool altaPasajero(std::string, std::string, std::string, std::string, std::string) = 0;
+     virtual bool altaConductor(std::string, std::string, std::string, std::string, std::set<TipoLibreta>) = 0;
+     virtual int registrarVehiculo(std::string, std::string, int, std::string, std::string, TipoVehiculo) = 0;
 };
 
 #endif

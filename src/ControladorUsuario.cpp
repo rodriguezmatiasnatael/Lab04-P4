@@ -5,18 +5,18 @@ ControladorUsuario::ControladorUsuario(){
     this->mve = ManejadorVehiculos::getInstance();
 }
 
-bool ControladorUsuario::altaPasajero(std::string nickname,std::string nombre,std::string email,std::string password,std::string ci){
+bool ControladorUsuario::altaPasajero(std::string nickname,std::string nombre,std::string password, std::string email,std::string ci){
     bool estaUsuario = this->mu->existeUsuario(nickname);
     if(!estaUsuario){
-        mu->crearPasajero(nickname,nombre,email,password,ci);
+        mu->crearPasajero(nickname,nombre,password,email,ci);
     }
     return !estaUsuario;
 }
 
-bool ControladorUsuario::altaConductor(std::string nickname,std::string nombre,std::string email,std::string password,std::set<TipoLibreta> libretas){
+bool ControladorUsuario::altaConductor(std::string nickname,std::string nombre,std::string password, std::string email,std::set<TipoLibreta> libretas){
     bool estaUsuario = this->mu->existeUsuario(nickname);
     if(!estaUsuario){
-        mu->crearConductor(nickname,nombre,email,password,libretas);
+        mu->crearConductor(nickname,nombre,password,email,libretas);
     }
     return !estaUsuario;
 }

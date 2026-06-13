@@ -12,6 +12,10 @@ Reserva::~Reserva() {
     this->calificaciones.clear();
 }
 
+int Reserva::getAsientosReservados() {
+    return this->asientosReservados;
+}
+
 void Reserva::setPasajero(Pasajero* p){
     this->pasajero = p;
 }

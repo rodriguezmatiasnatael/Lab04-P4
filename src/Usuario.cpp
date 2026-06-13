@@ -27,22 +27,6 @@ void Usuario::asociarCalificacion(Calificacion *cal) {
     this->calificaciones.insert(cal);
 }
 
-float Usuario::getCalificacionPromedio() {
-    if (this->calificaciones.empty()) {
-        return 0.0f; 
-    }
-
-    float suma = 0;
-    
-    for (auto c : this->calificaciones) {
-        if (c != nullptr) {            
-            suma += c->getPuntaje(); 
-        }
-    }
-
-    return suma / this->calificaciones.size();
-}
-
 void Usuario::borrarCalificacion(Calificacion* c) {
     this->calificaciones.erase(c);
 }

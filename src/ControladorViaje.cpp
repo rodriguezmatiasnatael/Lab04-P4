@@ -118,14 +118,14 @@ std::set<DTVehiculosConductor> ControladorViaje::listarVehiculosConductor(std::s
     return cond->listarVehiculos();
 }
 
-bool ControladorViaje:: altaViaje(std::string matricula,DTFecha fecha,std::string origen,std::string destino,int asientos,float precio){
-    Vehiculo* veh = this->mve->getVehiculo(matricula);
-    int capacidad = veh->getCapacidad();
+bool ControladorViaje:: altaViaje(std::string matricula, DTFecha fecha, std::string origen, std::string destino, int asientos, float precio){
+    Vehiculo* ve = this->mve->getVehiculo(matricula);
+    int capacidad = ve->getCapacidad();
     if (capacidad >= asientos){
-        bool hayVFecha = veh->hayViajeConductor(fecha);
+        bool hayVFecha = ve->hayViajeConductor(fecha);
         if (!hayVFecha){
-            Viaje* viaje = mvi->crearViaje(veh, fecha, origen, destino, asientos, precio);
-            veh->asociarViaje(viaje);
+            Viaje* viaje = mvi->crearViaje(ve, fecha, origen, destino, asientos, precio);
+            ve->asociarViaje(viaje);
             return true;
         }
     }
@@ -147,7 +147,7 @@ DTDetalleViaje ControladorViaje::detalleViaje(int codigo){
     setCodigo(codigo);
 }
 
-void ControladorViaje::eliminarViaje() {
+void ControladorViaje::eliminarViaje(){
     int codigo = this->getCodigo();
     Viaje* vi = this->mvi->getViaje(codigo);
     this->mvi->borrarViaje(vi);

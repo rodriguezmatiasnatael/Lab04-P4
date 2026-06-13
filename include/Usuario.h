@@ -21,7 +21,6 @@ public:
     std::string getNickname() const;
     std::string getNombre() const;
     virtual TipoUsuario getTipo();
-    float getCalificacionPromedio();
     DTUsuario getDTUsuario();
     void asociarCalificacion(Calificacion*);
     void borrarCalificacion(Calificacion*);
