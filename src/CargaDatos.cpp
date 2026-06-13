@@ -1,9 +1,8 @@
 #include <iostream>
 #include "../include/CargaDatos.h"
-#include "../include/Fabrica.h"
-#include "../include/IControladorFechaActual.h"
-#include "../include/IControladorUsuario.h"
-#include "../include/IControladorViaje.h"
+#include "../include/ControladorFechaActual.h"
+#include "../include/ControladorUsuario.h"
+#include "../include/ControladorViaje.h"
 
 CargaDatos* CargaDatos::instancia = nullptr;
 
@@ -24,9 +23,8 @@ void CargaDatos::cargarDatos() {
         return;
     }
 
-    Fabrica* f = Fabrica::getInstance();
-    IControladorUsuario* cu = f->getIControladorUsuario();
-    IControladorViaje* cv = f->getIControladorViaje();
+    ControladorUsuario* cu = new ControladorUsuario();
+    ControladorViaje* cv =  new ControladorViaje();
 
 
     // Conductores
@@ -133,7 +131,68 @@ void CargaDatos::cargarDatos() {
     cv->altaViaje("LDA4875", fecha13, "young", "montevideo", 1, 250.0f);
 
 
-    
+    // Reserva 1
+    cv->generarReserva("santi_90", 9, 2);
+
+    // Reserva 2
+    cv->generarReserva("mari_b", 9, 1);
+
+    // Reserva 3
+    cv->generarReserva("nacho_f", 10, 5);
+
+    // Reserva 4
+    cv->generarReserva("valen_uy", 10, 3);
+
+    // Reserva 5
+    cv->generarReserva("joaco_r", 10, 1);
+
+    // Reserva 6
+    cv->generarReserva("mari_b", 12, 1);
+
+    // Reserva 7
+    cv->generarReserva("nacho_f", 12, 1);
+
+    // Reserva 8
+    cv->generarReserva("mari_b", 1, 2);
+
+    // Reserva 9
+    cv->generarReserva("nacho_f", 9, 1);
+
+    // Calificacion 1
+    cv->setNickname("santi_90");
+    cv->setCodigo(9);
+    cv->calificarUsuario("matil92", 4);
+
+    // Calificacion 2
+    cv->setNickname("mari_b");
+    cv->setCodigo(9);
+    cv->calificarUsuario("matil92", 4);
+
+    // Calificacion 3
+    cv->setNickname("matil92");
+    cv->setCodigo(9);
+    cv->calificarUsuario("mari_b", 3);
+
+    // Calificacion 4
+    cv->setNickname("ana_silva");
+    cv->setCodigo(10);
+    cv->calificarUsuario("valen_uy", 5);
+
+    // Calificacion 5
+    cv->setNickname("ana_silva");
+    cv->setCodigo(10);
+    cv->calificarUsuario("joaco_r", 5);
+
+    // Calificacion 6
+    cv->setNickname("mari_b");
+    cv->setCodigo(12);
+    cv->calificarUsuario("carlos_r", 5);
+
+    // Calificacion 7
+    cv->setNickname("carlos_r");
+    cv->setCodigo(12);
+    cv->calificarUsuario("nacho_f", 5);
+
 
     datosCargados = true;
     std::cout << "Datos cargados exitosamente.\n";

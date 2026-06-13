@@ -24,11 +24,11 @@ private:
     static ManejadorViajes* mvi;
     std::string nickname;
     int codigo;
+public:
     std::string getNickname();
     int getCodigo();
     void setNickname(std::string);
     void setCodigo(int);
-public:
     ControladorViaje();
     std::set<std::string> listarPasajeros();
     std::set<DTConsultaViaje> consultarViajes(DTFecha,std::string,std::string,int);
