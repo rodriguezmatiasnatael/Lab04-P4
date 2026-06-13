@@ -31,6 +31,7 @@ public:
     Viaje(Vehiculo*,DTFecha, std::string, std::string, int, float);
     ~Viaje();
 
+    std::string getMatriculaVehiculo();
     int getCodigo();
     DTFecha getFecha();
     DTDetalleViaje getDTDetalleViaje();

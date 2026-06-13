@@ -128,7 +128,7 @@ bool ControladorViaje:: altaViaje(std::string matricula, DTFecha fecha, std::str
     if (capacidad >= asientos){
         bool hayVFecha = ve->hayViajeConductor(fecha);
         if (!hayVFecha){
-            Viaje* viaje = mvi->crearViaje(ve, fecha, origen, destino, asientos, precio);
+            Viaje* viaje = this->mvi->crearViaje(ve, fecha, origen, destino, asientos, precio);
             ve->asociarViaje(viaje);
             return true;
         }

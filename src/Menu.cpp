@@ -215,6 +215,7 @@ void Menu::altaViaje(){
 
     if (viajeOk) {
         std::cout << "Viaje registrado exitosamente.\n";
+
     } else {
         std::cout << "Error al registrar el viaje.\n";
     }
@@ -448,8 +449,9 @@ void Menu::eliminarViaje() {
     
     std::cout << ">> Reservas <<"<<std::endl;
     for(auto r: detalleviaje.getReservas()){
-    std::cout << "--- AsientosReservados: "<< r.getAsientosReservados()<<", Fecha: "<< r.getFecha().getDia()<< "/"<<r.getFecha().getMes()<< "/"<<r.getFecha().getAnio()<<", Pasajero: "<< r.getPasajero()<<std::endl;
-
+        std::cout << "--- AsientosReservados: "<< r.getAsientosReservados()<<", Fecha: "<< r.getFecha().getDia()<< "/"<<r.getFecha().getMes()<< "/"<<r.getFecha().getAnio()<<", Pasajero: "<< r.getPasajero()<<std::endl;
+    }
+    
     int confirmar;
     std::cout << "¿Confirmar eliminacion? (1: Si, 0: No): "; std::cin >> confirmar;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -464,7 +466,7 @@ void Menu::eliminarViaje() {
 
         std::cout << "Eliminacion cancelada.\n";
     }
-}
+
 }
 
 void Menu::administrarFechaActual(){

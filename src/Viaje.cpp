@@ -9,7 +9,6 @@ Viaje::Viaje(Vehiculo* v,DTFecha fecha, std::string origen, std::string destino,
     this->destino = destino;
     this->asientosPublicados = asientosPublicados;
     this->precio = precio;
-    this->vehiculo = nullptr;
     //seteamos codigo
     this->codigo = ultimoCodigo + 1;
     ultimoCodigo++;
@@ -20,6 +19,10 @@ Viaje::~Viaje() {
     this->vehiculo->borrarViaje(this);
     for (auto r : this->reservas) delete r;
     this->reservas.clear();
+}
+
+std::string Viaje::getMatriculaVehiculo() {
+    return this->vehiculo->getMatricula();
 }
 
 int Viaje::getCodigo() {
