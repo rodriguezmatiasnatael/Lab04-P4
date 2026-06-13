@@ -6,9 +6,7 @@ Reserva::Reserva(int asientosReservados, DTFecha fecha) {
 }
 
 Reserva::~Reserva() {
-    for (auto cal : this->calificaciones){
-        delete cal;
-    }
+    for (auto cal : this->calificaciones) delete cal;
     this->calificaciones.clear();
 }
 

@@ -15,6 +15,7 @@ private:
     std::set<TipoLibreta> libretas;
     std::set<Vehiculo*> vehiculos;
 public:
+    ~Conductor();
     Conductor(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::set<TipoLibreta> libs);
     TipoUsuario getTipo();
     bool estaHabilitado(TipoVehiculo tipo);
@@ -23,6 +24,7 @@ public:
     float getCalificacionPromedio();
     std::set<DTVehiculosConductor> listarVehiculos();
     bool hayViajesFechaConductor(DTFecha);
+    void borrarVehiculo(Vehiculo*);
 };
 
 #endif

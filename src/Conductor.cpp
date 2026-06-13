@@ -7,6 +7,11 @@ Conductor::Conductor(std::string nickname, std::string nombre, std::string contr
     this->libretas = libs;
 }
 
+Conductor::~Conductor() {
+    for (auto ve : this->vehiculos) delete ve;
+    this->vehiculos.clear();
+}
+
 bool Conductor::estaHabilitado(TipoVehiculo tipo){
     for (auto lib : this->libretas){
         if (tipo == TipoVehiculo::Auto){
@@ -70,4 +75,8 @@ bool Conductor::hayViajesFechaConductor(DTFecha fecha){
         }
     }
     return false;
+}
+
+void Conductor::borrarVehiculo(Vehiculo* ve) {
+    this->vehiculos.erase(ve);
 }

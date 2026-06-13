@@ -131,3 +131,11 @@ DTDetalleViaje Viaje::getDTDetalleViaje(){
     DTDetalleViaje dt = DTDetalleViaje(this->codigo, this->fecha, this->origen, this->destino, this->asientosPublicados, this->precio, dtv, dtres);
     return dt;
 }
+
+std::set<Reserva*> Viaje::getReservas(std::string nickname) {
+    std::set<Reserva*> res;
+    for (auto r : this->reservas) {
+        if (r->laRealizo(nickname)) res.insert(r);
+    }
+    return res;
+}

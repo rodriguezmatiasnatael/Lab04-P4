@@ -11,6 +11,12 @@ Vehiculo::Vehiculo(std::string matricula, int capacidad, std::string marca, std:
     this->tipo = tipo;
 }
 
+Vehiculo::~Vehiculo() {
+    this->conductor->borrarVehiculo(this);
+    for (auto vi : this->viajes) delete vi;
+    this->viajes.clear();
+}
+
 std::string Vehiculo::getMatricula(){
     return this->matricula;
 }
@@ -65,8 +71,8 @@ void Vehiculo::asociarViaje(Viaje* v){
     this->viajes.insert(v); // Lo mismo que en setConductor
 }
 
-void Vehiculo::borrarViaje(Viaje* v) {
-    this->viajes.erase(v);
+void Vehiculo::borrarViaje(Viaje* vi) {
+    this->viajes.erase(vi);
 }
 
 DTDetalleVehiculo Vehiculo::getDTDetalleVehiculo(){

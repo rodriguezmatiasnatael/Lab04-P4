@@ -44,6 +44,7 @@ public:
     std::set<DTUsuarioViaje> getSetDTUsuarioViaje(std::string, TipoUsuario);
     bool existeCalificacion(std::string, std::string);
     Reserva* obtenerReserva(std::string, std::string, TipoUsuario);
+    std::set<Reserva*> getReservas(std::string);
 };
 
 #endif

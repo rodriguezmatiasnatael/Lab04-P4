@@ -1,7 +1,6 @@
 #include "../include/Usuario.h"
 #include "../include/Calificacion.h"
 
-// === Constructor ===
 Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasena, std::string email) {
     this->nickname = nickname;
     this->nombre = nombre;
@@ -9,6 +8,8 @@ Usuario::Usuario(std::string nickname, std::string nombre, std::string contrasen
     this->email = email;
     this->calificaciones.clear();
 }
+
+Usuario::~Usuario() {}
 
 std::string Usuario::getNickname() const {
     return this->nickname;

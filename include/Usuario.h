@@ -16,7 +16,7 @@ protected:
     std::string email;
     std::set<Calificacion*> calificaciones;
 public:
-    //std::string getEmail(); Creo que no se usa
+    virtual ~Usuario();
     Usuario(std::string nickname, std::string nombre, std::string contrasena, std::string email);
     std::string getNickname() const;
     std::string getNombre() const;

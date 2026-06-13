@@ -8,8 +8,10 @@ class Pasajero : public Usuario {
 private:
     std::string ci;
 public:
+    Pasajero(std::string, std::string, std::string, std::string, std::string);
+    ~Pasajero();
     TipoUsuario getTipo();
-    Pasajero(std::string nickname, std::string nombre, std::string contrasena, std::string email, std::string documento);
+    
 };
 
 #endif

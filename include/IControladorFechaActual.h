@@ -5,7 +5,7 @@
 
 class IControladorFechaActual {
 public:
-    virtual ~IControladorFechaActual() {}
+    virtual ~IControladorFechaActual() {};
     virtual DTFecha getFecha() = 0;
     virtual void setFecha(DTFecha nuevaFecha) = 0;
 };

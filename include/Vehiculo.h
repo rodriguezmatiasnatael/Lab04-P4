@@ -22,6 +22,7 @@ private:
     Conductor * conductor;
     std::set<Viaje*> viajes;
 public:
+    ~Vehiculo();
     Vehiculo(std::string matricula, int capacidad, std::string marca, std::string modelo, TipoVehiculo tipo);
     std::string getMatricula();
     std::string getMarca();
