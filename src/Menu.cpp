@@ -265,8 +265,8 @@ void Menu::generarReserva() {
     std::set<DTConsultaViaje> consultaViajes = iControladorViaje->consultarViajes(DTFecha(dia,mes,anio),origen,destino,asientos);
     //TODO: Recorrer la coleccion y mostrar: "> Codigo: xx, Marca: yy, Modelo: zzz, Conductor: aaa, CalificacionPromedio: qqq, PrecioTotal: eee"
     for(auto v: consultaViajes){
-        std::cout << "> Codigo: "<< v.getCodigo() << ",Marca: "<< v.getMarca()<<",Modelo: "<<v.getModelo()<<
-        ",Conductor: "<<v.getConductor()<<v.getCalificacionProm()<<",PrecioTotal: "<<v.getPrecioTotal()<<std::endl;
+        std::cout << "> Codigo: "<< v.getCodigo() << ", Marca: "<< v.getMarca()<<", Modelo: "<<v.getModelo()<<
+        ", Conductor: "<<v.getConductor()<< ", CalificacionPromedio: "<<v.getCalificacionProm()<<", PrecioTotal: "<<v.getPrecioTotal()<<std::endl;
     }
     bool hayViajes = false;
     //TODO: Validar coleccion vacía
@@ -338,7 +338,7 @@ void Menu::calificarUsuario(){
 
     //TODO: Recorrer la coleccion y mostrar "> Codigo: xx, Fecha: dd/mm/aaaa, Origen: zzz, Destino: www, Conductor: aaa"
     for(auto v: viajes){
-        std::cout << "> Codigo: "<< v.getCodigo() << ",Fecha: "<<v.getFecha().getDia()<<"/"<<v.getFecha().getMes()<<"/"<<v.getFecha().getAnio()<<
+        std::cout << "> Codigo: "<< v.getCodigo() << ", Fecha: "<<v.getFecha().getDia()<<"/"<<v.getFecha().getMes()<<"/"<<v.getFecha().getAnio()<<
         ", Origen: "<< v.getOrigen() << ", Destino: " << v.getDestino() << ", Conductor: " << v.getConductor() << std::endl;
     }
 
@@ -365,7 +365,13 @@ void Menu::calificarUsuario(){
 
     //TODO: Recorrer la coleccion y mostrar "> Nickname: xx, Tipo: yyy"
     for(auto u: usuariosViaje){
-        std::cout << "> Nickname: "<< u.getNickname()<<",Tipo: "<< u.getTipo()<< std::endl;
+        std::string tipo;
+        if (u.getTipo()==TipoUsuario::T_Conductor){
+            tipo = "Conductor";
+        } else { 
+            tipo = "Pasajero";
+        }
+        std::cout << "> Nickname: "<< u.getNickname()<<", Tipo: "<< tipo<< std::endl;
     }
     std::string nicknameCalificado;
     int calificacion;
@@ -440,12 +446,20 @@ void Menu::eliminarViaje() {
 
 
 
-    std::cout << ">> Viaje <<"<< std::endl << "--- Matrícula: "<< detalleviaje.getVehiculo().getMatricula()<< 
-    ",Fecha: "<< detalleviaje.getFecha().getDia()<< "/"<<detalleviaje.getFecha().getMes()<< "/"<<detalleviaje.getFecha().getAnio()<<
-    ", Origen: "<<detalleviaje.getOrigen()<< " Destino: "<<detalleviaje.getDestino()<<", Capacidad: "<<detalleviaje.getVehiculo().getCapacidad()<<", Precio por asiento: "<< detalleviaje.getPrecio()<< std::endl;
+    std::cout << ">> Viaje <<"<< std::endl << "--- Codigo: "<< detalleviaje.getCodigo()<< 
+    ", Fecha: "<< detalleviaje.getFecha().getDia()<< "/"<<detalleviaje.getFecha().getMes()<< "/"<<detalleviaje.getFecha().getAnio()<<
+    ", Origen: "<<detalleviaje.getOrigen()<< ", Destino: "<<detalleviaje.getDestino()<<", AsientosPublicados: "<<detalleviaje.getAsientosPublicados()<< ", Precio por asiento: "<< detalleviaje.getPrecio()<< std::endl;
     
+    std::string tipoV;
+    
+    if (detalleviaje.getVehiculo().getTipo() == 0){
+        tipoV = "Auto";   
+    } else {
+        tipoV = "Moto";
+    }
+
     std::cout << ">> Vehiculo <<"<< std::endl<< "--- Matrícula: "<< detalleviaje.getVehiculo().getMatricula()<<", Capacidad: "<<detalleviaje.getVehiculo().getCapacidad()<<", Marca: "<< detalleviaje.getVehiculo().getMarca()<<
-    ", Modelo: "<< detalleviaje.getVehiculo().getModelo()<<", Tipo: "<<detalleviaje.getVehiculo().getTipo()<< std::endl;
+    ", Modelo: "<< detalleviaje.getVehiculo().getModelo()<<", Tipo: "<<tipoV<< std::endl;
     
     std::cout << ">> Reservas <<"<<std::endl;
     for(auto r: detalleviaje.getReservas()){

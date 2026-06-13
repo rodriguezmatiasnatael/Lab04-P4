@@ -46,8 +46,8 @@ float Vehiculo::calPromConductor(){
     return this->conductor->getCalificacionPromedio();
 }
 
-DTUsuarioViaje Vehiculo::getDTUsuarioViaje(){ //esta bien asi o tendria que usar punteros?
-    return DTUsuarioViaje(this->conductor->getNombre(),TipoUsuario::T_Conductor);
+DTUsuarioViaje Vehiculo::getDTUsuarioViaje(){ 
+    return DTUsuarioViaje(this->conductor->getNickname(),TipoUsuario::T_Conductor);
 }
 
 DTVehiculosConductor Vehiculo::getDTVehiculoConductor(){

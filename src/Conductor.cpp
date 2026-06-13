@@ -40,7 +40,7 @@ int Conductor::getCantCalificaciones(){
 }
 
 float Conductor::getCalificacionPromedio(){
-    float total = 0;
+    float total = 5;
     if (this->getCantCalificaciones() == 0){
         return total;
     }
