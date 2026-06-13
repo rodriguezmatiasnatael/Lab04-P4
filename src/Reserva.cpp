@@ -36,7 +36,7 @@ bool Reserva::hayCalificacion(std::string nickCalificador,std::string nickCalifi
 }
 
 Calificacion* Reserva::calificar(Usuario* puntua, Usuario* recibe, int puntaje){
-    DTFecha fechaActual = ControladorFechaActual::getInstance()->getFecha();  
+    DTFecha fechaActual = ControladorFechaActual::getInstance()->getFecha();
     Calificacion* cal = new Calificacion(fechaActual, puntaje);
     cal->setRealiza(puntua);
     cal->setCalifica(recibe);

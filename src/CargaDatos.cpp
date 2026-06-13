@@ -131,6 +131,8 @@ void CargaDatos::cargarDatos() {
     // Viaje 13
     DTFecha fecha13(20, 10, 2026);
     cv->altaViaje("LDA4875", fecha13, "young", "montevideo", 1, 250.0f);
+
+
     
 
     datosCargados = true;

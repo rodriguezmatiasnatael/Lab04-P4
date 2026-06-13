@@ -19,9 +19,9 @@
 
 class ControladorViaje: public IControladorViaje {
 private:
-    ManejadorVehiculos* mve;
-    ManejadorUsuarios* mu;
-    ManejadorViajes* mvi;
+    static ManejadorVehiculos* mve;
+    static ManejadorUsuarios* mu;
+    static ManejadorViajes* mvi;
     std::string nickname;
     int codigo;
     std::string getNickname();

@@ -20,7 +20,7 @@ public:
     Usuario(std::string nickname, std::string nombre, std::string contrasena, std::string email);
     std::string getNickname() const;
     std::string getNombre() const;
-    virtual TipoUsuario getTipo();
+    virtual TipoUsuario getTipo() = 0;
     DTUsuario getDTUsuario();
     void asociarCalificacion(Calificacion*);
     void borrarCalificacion(Calificacion*);

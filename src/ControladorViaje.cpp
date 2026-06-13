@@ -1,5 +1,9 @@
 #include "../include/ControladorViaje.h"
 
+ManejadorUsuarios* ControladorViaje::mu = nullptr;
+ManejadorVehiculos* ControladorViaje::mve = nullptr;
+ManejadorViajes* ControladorViaje::mvi = nullptr;
+
 ControladorViaje::ControladorViaje(){
     this->mu = ManejadorUsuarios::getInstance();
     this->mve = ManejadorVehiculos::getInstance();
