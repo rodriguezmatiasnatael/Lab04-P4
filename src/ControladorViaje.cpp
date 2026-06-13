@@ -15,7 +15,7 @@ std::string ControladorViaje::getNickname() {
 }
 
 int ControladorViaje::getCodigo() {
-    return this->codigo;
+    return this->codigoE;
 }
 
 void ControladorViaje::setNickname(std::string nickname){
@@ -23,7 +23,7 @@ void ControladorViaje::setNickname(std::string nickname){
 }
 
 void ControladorViaje::setCodigo(int codigo) {
-    this->codigo = codigo;
+    this->codigoE = codigo;
 }
 
 std::set<std::string> ControladorViaje::listarPasajeros(){
@@ -101,7 +101,7 @@ std::set<DTUsuarioViaje> ControladorViaje:: listarUsuariosViaje(int codigo){
 }
 
 bool ControladorViaje:: calificarUsuario(std::string nicknameCalificado ,int calificacion){
-    Viaje* viaje = mvi->getViaje(codigo);
+    Viaje* viaje = mvi->getViaje(codigoE);
     bool eCalificacion = viaje->existeCalificacion(nickname, nicknameCalificado);
     if (!eCalificacion){
         Usuario* puntua = mu->getUsuario(nickname);
@@ -147,13 +147,13 @@ std::set<DTListarViaje> ControladorViaje::listarViajes(){
 
 DTDetalleViaje ControladorViaje::detalleViaje(int codigo){
     Viaje* v = mvi->getViaje(codigo);
-    return v->getDTDetalleViaje();
     setCodigo(codigo);
+    return v->getDTDetalleViaje();
 }
 
 void ControladorViaje::eliminarViaje(){
-    int codigo = this->getCodigo();
-    Viaje* vi = this->mvi->getViaje(codigo);
+    //int codigo = this->getCodigo();
+    Viaje* vi = this->mvi->getViaje(codigoE);
     this->mvi->borrarViaje(vi);
     delete vi;
     this->setCodigo(-1);

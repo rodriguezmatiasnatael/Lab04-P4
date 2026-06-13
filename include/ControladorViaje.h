@@ -23,7 +23,8 @@ private:
     static ManejadorUsuarios* mu;
     static ManejadorViajes* mvi;
     std::string nickname;
-    int codigo;
+    int codigoE;
+
 public:
     std::string getNickname();
     int getCodigo();
