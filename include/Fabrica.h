@@ -10,6 +10,7 @@ private:
     static Fabrica* instancia;
     IControladorUsuario* interfazUsuario;
     IControladorViaje* interfazViaje;
+    IControladorFechaActual* interfazFecha;
     Fabrica();
 public:
     static Fabrica* getInstance();

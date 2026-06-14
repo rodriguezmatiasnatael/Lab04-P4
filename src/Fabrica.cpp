@@ -5,7 +5,11 @@
 
 Fabrica* Fabrica::instancia = nullptr;
 
-Fabrica::Fabrica() {}
+Fabrica::Fabrica() {
+    this->interfazUsuario = nullptr;
+    this->interfazViaje = nullptr; 
+    this->interfazFecha = nullptr;
+}
 
 Fabrica* Fabrica::getInstance() {
     if (instancia == nullptr) {
